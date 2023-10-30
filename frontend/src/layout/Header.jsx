@@ -15,14 +15,18 @@ function Header() {
 				<h1 className="sr-only">Argent Bank</h1>
 			</Link>
 				<ul>
-					<Link to='/register' className="main-nav__item">
-						<i className="fa fa-user-circle"></i>
-						Register
-					</Link>
-					<Link to='/signin' className="main-nav__item">
-						<i className="fa fa-sign-in"></i>
-						Sign In
-					</Link>
+					<li>
+						<Link to='/register' className="main-nav__item">
+							<i className="fa fa-user-circle"></i>
+							Register
+						</Link>
+					</li>
+					<li>
+						<Link to='/signin' className="main-nav__item">
+							<i className="fa fa-sign-in"></i>
+							Sign In
+						</Link>
+					</li>
 				</ul>
 		</nav>
 	)
