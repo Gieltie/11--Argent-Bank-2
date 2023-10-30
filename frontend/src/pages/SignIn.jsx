@@ -1,7 +1,11 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import { FormContainer } from '../components'
+import { useLoginMutation, useUserDataMutation} from '../slices/usersApiSlice'
+import { setCredentials, setUserProfile} from '../slices/authSlice'
 
 export { SignIn }
 
@@ -10,8 +14,45 @@ function SignIn() {
 	const [password, setPassword] = useState('')
 	const [remember, setRemember] = useState(false)
 
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+
+	const [login, { isLoading }] = useLoginMutation()
+	const [fetchProfile] = useUserDataMutation()
+
+	const getUserProfile = async () => {
+    const getToken = JSON.parse(localStorage.getItem('userInfo'))
+    if (getToken) {
+      const token = getToken.body.token
+      try {
+        const res = await fetchProfile(token).unwrap()
+        dispatch(setUserProfile({ ...res }))
+        navigate('/user')
+      } catch (err) {
+        toast.error(err?.data?.message || err?.error)
+      }
+    }
+  }
+
+	const { userInfo } = useSelector((state) => state.auth)
+
+	useEffect(() => {
+		if (userInfo) {
+			getUserProfile()
+			navigate('/user')
+		}
+	}, [navigate, userInfo])
+
 	const onSubmit = async (e) => {
 		e.preventDefault()
+		try {
+			const res = await login({ email, password }).unwrap()
+			dispatch(setCredentials({ ...res }))
+			toast.success(res.message)
+			navigate('/user')
+		} catch (err) {
+			toast.error(err?.data?.message || err.error)
+		}
 	}
 
 	return (
@@ -52,7 +93,7 @@ function SignIn() {
 					/>
 					<label htmlFor="form-checkbox">Remember me</label>
 				</div>
-				<button className="sign-in-button">Sign In</button>
+				<button className="sign-in-button">{isLoading ? <span>Loading...</span> : <span>Sign In</span>}</button>
 				<p>New customer? <Link to='/register'>Register</Link></p>
 			</form>
 		</FormContainer>

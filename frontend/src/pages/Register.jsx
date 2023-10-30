@@ -1,7 +1,11 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import { FormContainer } from '../components'
+import { useRegisterMutation } from '../slices/usersApiSlice'
+import { setCredentials } from '../slices/authSlice'
 
 export { Register }
 
@@ -13,8 +17,33 @@ function Register() {
 	const [lastName, setLastName] = useState('')
 	const [userName, setUserName] = useState('')
 
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+
+	const { userInfo } = useSelector((state) => state.auth)
+
+	const [register, { isLoading }] = useRegisterMutation()
+
+	useEffect(() => {
+		if (userInfo) {
+			navigate('/user')
+		}
+	}, [navigate, userInfo])
+
 	const onSubmit = async (e) => {
 		e.preventDefault()
+		if (password !== password2) {
+			toast.error('Passwords do not match')
+		} else {
+			try {
+				const res = await register({ email, password, password2, firstName, lastName, userName, }).unwrap()
+				dispatch(setCredentials({ ...res }))
+				toast.success(res.message)
+				navigate('/user')
+			} catch (err) {
+				toast.error(err?.data?.message || err.error)
+			}
+		}
 	}
 
 	return (
@@ -92,7 +121,7 @@ function Register() {
 					/>
 					<label htmlFor="form-userName">User Name</label>
 				</div>
-				<button className='register-button'>Register</button>
+				<button className='register-button'>{isLoading ? <span>Loading...</span> : <span>Register</span>}</button>
 				<p>Already have an account? <br /><Link to='/signin'>Sign In</Link></p>
 			</form>
 		</FormContainer>
