@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { Header, Footer } from './layout'
+import { Header, Footer } from './components'
 import './App.scss'
 
 export { App }

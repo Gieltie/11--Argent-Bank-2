@@ -4,6 +4,8 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import { App } from './App.jsx'
 import { Home, SignIn, Register, User, EditProfile, Error } from './pages'
 import { PrivateRoute } from './components'
+import { Provider } from 'react-redux'
+import { store } from './store.js'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +23,9 @@ const router = createBrowserRouter(
 )
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>,
+    <Provider store={store}>
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>,
+    </Provider>
 )
