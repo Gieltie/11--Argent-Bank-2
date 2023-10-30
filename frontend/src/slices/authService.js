@@ -2,8 +2,8 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3001/api/v1/user";
 
-// Register user
-const register = async (userData) => {
+// Signup user
+const signup = async (userData) => {
   const response = await axios.post(API_URL + "/signup", userData);
 
   if (response.data) {
@@ -30,7 +30,7 @@ const logout = () => {
 };
 
 const authService = {
-  register,
+  signup,
   login,
   logout,
 };

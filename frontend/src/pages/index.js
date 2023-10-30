@@ -1,5 +1,5 @@
 export * from "./Error";
 export * from "./Home";
-export * from "./Register";
-export * from "./SignIn";
+export * from "./SignUp";
+export * from "./LogIn";
 export * from "./User";

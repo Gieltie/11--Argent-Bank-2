@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import { App } from './App.jsx'
-import { Home, SignIn, Register, User, Error } from './pages'
+import { Home, LogIn, Signup, User, Error } from './pages'
 import { PrivateRoute } from './components'
 import { Provider } from 'react-redux'
 import { store } from './store.js'
@@ -14,8 +14,8 @@ const router = createBrowserRouter(
         <Route path="/user" element={<User />}></Route>
       </Route>
       <Route index={true} path="/" element={<Home />}></Route>
-      <Route path="/signin" element={<SignIn />}></Route>
-      <Route path="/register" element={<Register />}></Route>
+      <Route path="/login" element={<LogIn />}></Route>
+      <Route path="/signup" element={<Signup />}></Route>
       <Route path="/*" element={<Error />}></Route>
     </Route>
   )

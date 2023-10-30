@@ -6,7 +6,7 @@ export { Header }
 
 function Header() {
 	const { userInfo } = useSelector((state) => state.auth)
-	//const { userProfile } = useSelector((state) => state.auth)
+	const { userProfile } = useSelector((state) => state.auth)
 
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -26,29 +26,34 @@ function Header() {
 				/>
 				<h1 className="sr-only">Argent Bank</h1>
 			</Link>
-			{userInfo ?
-				<ul>
-					<Link to='/user' className="main-nav__item">
-						<i className="fa fa-user-circle"></i>
-						{/* {userProfile} */}
-					</Link>
-					<Link to='/' className="main-nav__item" onClick={onLogout}>
-						<i className="fa fa-sign-out"></i>
-						Sign out
-					</Link>
-				</ul>
-				:
-				<ul>
-					<Link to='/register' className="main-nav__item">
-						<i className="fa fa-user-circle"></i>
-						Register
-					</Link>
-					<Link to='/signin' className="main-nav__item">
-						<i className="fa fa-sign-in"></i>
-						Sign In
-					</Link>
-				</ul>
-			}
+			<ul>
+				<li>
+					{ userProfile ? 
+						<Link to='/user' className="main-nav__item">
+								<i className="fa fa-user-circle"></i>
+								{userProfile.body.userName}
+						</Link> 
+						: 
+						<Link to='/signup' className="main-nav__item">
+							<i className="fa fa-user-circle"></i>
+							Signup
+						</Link>
+					}
+				</li>
+				<li>
+					{ userInfo ?
+						<Link to='/' className="main-nav__item" onClick={onLogout}>
+							<i className="fa fa-sign-out"></i>
+							Sign out
+						</Link>
+						:
+						<Link to='/login' className="main-nav__item">
+							<i className="fa fa-sign-in"></i>
+							Sign In
+						</Link>
+					}
+				</li>
+			</ul>
 		</nav>
 	)
 }

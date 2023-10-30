@@ -7,9 +7,9 @@ import { FormContainer } from '../components'
 import { useLoginMutation, useUserDataMutation} from '../slices/usersApiSlice'
 import { setCredentials, setUserProfile} from '../slices/authSlice'
 
-export { SignIn }
+export { LogIn }
 
-function SignIn() {
+function LogIn() {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [remember, setRemember] = useState(false)
@@ -94,7 +94,7 @@ function SignIn() {
 					<label htmlFor="form-checkbox">Remember me</label>
 				</div>
 				<button className="sign-in-button">{isLoading ? <span>Loading...</span> : <span>Sign In</span>}</button>
-				<p>New customer? <Link to='/register'>Register</Link></p>
+				<p>New customer? <Link to='/signup'>Signup</Link></p>
 			</form>
 		</FormContainer>
 	)

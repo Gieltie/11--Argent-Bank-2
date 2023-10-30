@@ -27,7 +27,7 @@ body {
   background-color: #12002b;
 }
 
-.sign-in-content, .register-content {
+.sign-in-content, .signup-content {
   box-sizing: border-box;
   background-color: white;
   width: 300px;
@@ -160,7 +160,7 @@ body {
   }
 }
 
-.sign-in-button, .register-button {
+.sign-in-button, .signup-button {
   display: block;
   width: 100%;
   padding: 8px;

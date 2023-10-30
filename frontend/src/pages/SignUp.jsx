@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 
 import { FormContainer } from '../components'
-import { useRegisterMutation } from '../slices/usersApiSlice'
+import { useSignupMutation } from '../slices/usersApiSlice'
 import { setCredentials } from '../slices/authSlice'
 
-export { Register }
+export { Signup }
 
-function Register() {
+function Signup() {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [password2, setPassword2] = useState('')
@@ -22,7 +22,7 @@ function Register() {
 
 	const { userInfo } = useSelector((state) => state.auth)
 
-	const [register, { isLoading }] = useRegisterMutation()
+	const [signup, { isLoading }] = useSignupMutation()
 
 	useEffect(() => {
 		if (userInfo) {
@@ -36,7 +36,7 @@ function Register() {
 			toast.error('Passwords do not match')
 		} else {
 			try {
-				const res = await register({ email, password, password2, firstName, lastName, userName, }).unwrap()
+				const res = await signup({ email, password, password2, firstName, lastName, userName, }).unwrap()
 				dispatch(setCredentials({ ...res }))
 				toast.success(res.message)
 				navigate('/user')
@@ -48,8 +48,8 @@ function Register() {
 
 	return (
 		<FormContainer>
-			<i className="fa fa-user-circle register-content__icon"></i>
-			<h1>Register</h1>
+			<i className="fa fa-user-circle signup-content__icon"></i>
+			<h1>Signup</h1>
 			<form onSubmit={onSubmit}>
 				<div className="input-wrapper">
 					<input
@@ -121,8 +121,8 @@ function Register() {
 					/>
 					<label htmlFor="form-userName">User Name</label>
 				</div>
-				<button className='register-button'>{isLoading ? <span>Loading...</span> : <span>Register</span>}</button>
-				<p>Already have an account? <br /><Link to='/signin'>Sign In</Link></p>
+				<button className='signup-button'>{isLoading ? <span>Loading...</span> : <span>Signup</span>}</button>
+				<p>Already have an account? <br /><Link to='/login'>Sign In</Link></p>
 			</form>
 		</FormContainer>
 	)
