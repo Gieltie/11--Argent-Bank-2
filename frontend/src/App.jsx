@@ -1,12 +1,15 @@
+import { Outlet } from 'react-router-dom'
+import { Header, Footer } from './layout'
 import './App.scss'
 
-function App() {
+export { App }
 
+function App() {
   return (
     <>
-      <h1>Argent bank</h1>
+      <Header />
+      <Outlet />
+      <Footer />
     </>
   )
 }
-
-export default App
