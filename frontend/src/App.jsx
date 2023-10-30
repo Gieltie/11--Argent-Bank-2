@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
-import { Header, Footer } from './components'
 import { ToastContainer } from 'react-toastify'
+import { Header, Footer } from './components'
 import './App.scss'
 import "react-toastify/dist/ReactToastify.css"
 

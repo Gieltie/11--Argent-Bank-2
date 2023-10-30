@@ -2,58 +2,61 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-
-import { FormContainer } from '../components'
-import { useLoginMutation, useUserDataMutation} from '../slices/usersApiSlice'
-import { setCredentials, setUserProfile} from '../slices/authSlice'
+import { FormContainer, Spinner } from '../components'
+import { login, reset } from '../features/auth/authSlice'
 
 export { LogIn }
 
 function LogIn() {
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+	const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  })
 	const [remember, setRemember] = useState(false)
 
-	const navigate = useNavigate()
-	const dispatch = useDispatch()
+  const { email, password } = formData
 
-	const [login, { isLoading }] = useLoginMutation()
-	const [fetchProfile] = useUserDataMutation()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-	const getUserProfile = async () => {
-    const getToken = JSON.parse(localStorage.getItem('userInfo'))
-    if (getToken) {
-      const token = getToken.body.token
-      try {
-        const res = await fetchProfile(token).unwrap()
-        dispatch(setUserProfile({ ...res }))
-        navigate('/user')
-      } catch (err) {
-        toast.error(err?.data?.message || err?.error)
-      }
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
     }
+
+    if (isSuccess || user) {
+			toast.success(user.message)
+      navigate('/user')
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
   }
 
-	const { userInfo } = useSelector((state) => state.auth)
+  const onSubmit = (e) => {
+    e.preventDefault()
 
-	useEffect(() => {
-		if (userInfo) {
-			getUserProfile()
-			navigate('/user')
-		}
-	}, [navigate, userInfo])
+    const userData = {
+      email,
+      password,
+    }
 
-	const onSubmit = async (e) => {
-		e.preventDefault()
-		try {
-			const res = await login({ email, password }).unwrap()
-			dispatch(setCredentials({ ...res }))
-			toast.success(res.message)
-			navigate('/user')
-		} catch (err) {
-			toast.error(err?.data?.message || err.error)
-		}
-	}
+    dispatch(login(userData))
+  }
+
+  if (isLoading) {
+    return <Spinner />
+  }
 
 	return (
 		<FormContainer>
@@ -66,7 +69,7 @@ function LogIn() {
 						id='form-email'
 						name="email"
 						value={email}
-						onChange={(e) => setEmail(e.target.value)}
+						onChange={onChange}
 						//autoComplete='true'
 						required
 					/>
@@ -78,7 +81,7 @@ function LogIn() {
 						id='form-password'
 						name='password'
 						value={password}
-						onChange={(e) => setPassword(e.target.value)}
+						onChange={onChange}
 						required
 					/>
 					<label htmlFor="form-password">Password</label>
@@ -93,7 +96,7 @@ function LogIn() {
 					/>
 					<label htmlFor="form-checkbox">Remember me</label>
 				</div>
-				<button className="sign-in-button">{isLoading ? <span>Loading...</span> : <span>Sign In</span>}</button>
+				<button className="sign-in-button">Sign In</button>
 				<p>New customer? <Link to='/signup'>Signup</Link></p>
 			</form>
 		</FormContainer>

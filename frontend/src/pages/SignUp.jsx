@@ -2,49 +2,71 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-
-import { FormContainer } from '../components'
-import { useSignupMutation } from '../slices/usersApiSlice'
-import { setCredentials } from '../slices/authSlice'
+import { FormContainer, Spinner } from '../components'
+import { reset, register } from '../features/auth/authSlice'
 
 export { Signup }
 
 function Signup() {
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const [password2, setPassword2] = useState('')
-	const [firstName, setFirstName] = useState('')
-	const [lastName, setLastName] = useState('')
-	const [userName, setUserName] = useState('')
+	const [formData, setFormData] = useState({
+		email: '',
+    password: '',
+    password2: '',
+    firstName: '',
+    lastName: '',
+    userName: '',
+  })
 
-	const navigate = useNavigate()
-	const dispatch = useDispatch()
+  const { email, password, password2, firstName, lastName, userName } = formData
 
-	const { userInfo } = useSelector((state) => state.auth)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-	const [signup, { isLoading }] = useSignupMutation()
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
 
-	useEffect(() => {
-		if (userInfo) {
-			navigate('/user')
-		}
-	}, [navigate, userInfo])
+  useEffect(() => {
+    if (isError) {
+      toast.error(user)
+    }
 
-	const onSubmit = async (e) => {
-		e.preventDefault()
-		if (password !== password2) {
-			toast.error('Passwords do not match')
-		} else {
-			try {
-				const res = await signup({ email, password, password2, firstName, lastName, userName, }).unwrap()
-				dispatch(setCredentials({ ...res }))
-				toast.success(res.message)
-				navigate('/user')
-			} catch (err) {
-				toast.error(err?.data?.message || err.error)
-			}
-		}
-	}
+    if (isSuccess || user) {
+      navigate('/user')
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    if (password !== password2) {
+      toast.error('Passwords do not match')
+    } else {
+      const userData = {
+				email,
+        password,
+        password2,
+        firstName,
+        lastName,
+        userName,
+      }
+
+      dispatch(register(userData))
+    }
+  }
+
+  if (isLoading) {
+    return <Spinner />
+  }
 
 	return (
 		<FormContainer>
@@ -57,7 +79,7 @@ function Signup() {
 						id='form-email'
 						name="email"
 						value={email}
-						onChange={(e) => setEmail(e.target.value)}
+						onChange={onChange}
 						autoComplete='false'
 						required
 					/>
@@ -69,7 +91,7 @@ function Signup() {
 						id='form-password'
 						name='password'
 						value={password}
-						onChange={(e) => setPassword(e.target.value)}
+						onChange={onChange}
 						required
 					/>
 					<label htmlFor="form-password">Password</label>
@@ -80,7 +102,7 @@ function Signup() {
 						id='form-password2'
 						name='password2'
 						value={password2}
-						onChange={(e) => setPassword2(e.target.value)}
+						onChange={onChange}
 						required
 					/>
 					<label htmlFor="form-password2">Confirm Password</label>
@@ -91,7 +113,7 @@ function Signup() {
 						id='form-firstName'
 						name='firstName'
 						value={firstName}
-						onChange={(e) => setFirstName(e.target.value)}
+						onChange={onChange}
 						autoComplete='true'
 						required
 					/>
@@ -103,7 +125,7 @@ function Signup() {
 						id='form-lastName'
 						name='lastName'
 						value={lastName}
-						onChange={(e) => setLastName(e.target.value)}
+						onChange={onChange}
 						autoComplete='true'
 						required
 					/>
@@ -115,13 +137,13 @@ function Signup() {
 						id='form-userName'
 						name='userName'
 						value={userName}
-						onChange={(e) => setUserName(e.target.value)}
+						onChange={onChange}
 						autoComplete='true'
 						required
 					/>
 					<label htmlFor="form-userName">User Name</label>
 				</div>
-				<button className='signup-button'>{isLoading ? <span>Loading...</span> : <span>Signup</span>}</button>
+				<button className='signup-button'>Signup</button>
 				<p>Already have an account? <br /><Link to='/login'>Sign In</Link></p>
 			</form>
 		</FormContainer>

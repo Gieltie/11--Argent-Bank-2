@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
-import { App } from './App.jsx'
-import { Home, LogIn, Signup, User, Error } from './pages'
-import { PrivateRoute } from './components'
 import { Provider } from 'react-redux'
+import { App } from './App.jsx'
+import { PrivateRoute } from './components'
+import { Home, LogIn, Signup, User, Error } from './pages'
 import { store } from './store.js'
 
 const router = createBrowserRouter(
@@ -22,9 +22,9 @@ const router = createBrowserRouter(
 )
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
     <Provider store={store}>
-      <React.StrictMode>
         <RouterProvider router={router} />
-      </React.StrictMode>,
     </Provider>
+  </React.StrictMode>,
 )

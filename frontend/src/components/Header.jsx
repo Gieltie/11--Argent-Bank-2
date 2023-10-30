@@ -1,18 +1,20 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { logout, reset } from '../features/auth/authSlice'
 import Logo from '../assets/img/argentBankLogo.png'
-import { removeCredentials } from '../slices/authSlice'
+
 export { Header }
 
 function Header() {
-	const { userInfo } = useSelector((state) => state.auth)
+	const { user } = useSelector((state) => state.auth)
 	const { userProfile } = useSelector((state) => state.auth)
 
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
 	const onLogout = () => {
-		dispatch(removeCredentials());
+		dispatch(logout())
+		dispatch(reset())
 		navigate('/');
 	};
 
@@ -41,7 +43,7 @@ function Header() {
 					}
 				</li>
 				<li>
-					{ userInfo ?
+					{ user ?
 						<Link to='/' className="main-nav__item" onClick={onLogout}>
 							<i className="fa fa-sign-out"></i>
 							Sign out
@@ -57,6 +59,3 @@ function Header() {
 		</nav>
 	)
 }
-
-
-
