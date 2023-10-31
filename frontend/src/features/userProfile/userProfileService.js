@@ -12,10 +12,6 @@ const getProfile = async (token) => {
 
   const response = await axios.post(API_URL, null, config);
 
-  if (response.data) {
-    localStorage.setItem("userProfile", JSON.stringify(response.data.body));
-  }
-
   return response.data;
 };
 

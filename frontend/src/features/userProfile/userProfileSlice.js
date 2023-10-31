@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userProfileService from "./userProfileService";
 
-const userProfile = JSON.parse(localStorage.getItem("userProfile"));
-
 const initialState = {
-  profile: userProfile ? userProfile : null,
+  firstName: "",
+  lastName: "",
+  userName: "",
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -34,7 +34,15 @@ export const userProfileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    reset: (state) => initialState,
+    resetUser: (state) => initialState /* {
+      state.firstName = "";
+      state.lastName = "";
+      state.userName = "";
+      state.isError = false;
+      state.isSuccess = false;
+      state.isLoading = false;
+      state.message = "";
+    } */,
   },
   extraReducers: (builder) => {
     builder
@@ -57,7 +65,10 @@ export const userProfileSlice = createSlice({
       .addCase(getProfile.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.profile = action.payload;
+        state.profile = action.payload.body;
+        state.firstName = action.payload.body.firstName;
+        state.lastName = action.payload.body.lastName;
+        state.userName = action.payload.body.userName;
       })
       .addCase(getProfile.rejected, (state, action) => {
         state.isLoading = false;
@@ -67,5 +78,5 @@ export const userProfileSlice = createSlice({
   },
 });
 
-export const { reset } = userProfileSlice.actions;
+export const { resetUser } = userProfileSlice.actions;
 export default userProfileSlice.reducer;

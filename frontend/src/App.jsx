@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css"
 export { App }
 
 function App() {
-  console.log("teste")
   return (
     <>
       <Header />
