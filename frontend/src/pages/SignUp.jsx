@@ -27,11 +27,16 @@ function Signup() {
   )
 
   useEffect(() => {
+		const customId = "custom-id-yes";
+
     if (isError) {
       toast.error(user)
     }
 
     if (isSuccess || user) {
+			toast.success(message, {
+				toastId: customId
+			})
       navigate('/user')
     }
 

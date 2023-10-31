@@ -14,8 +14,8 @@ function App() {
       <Footer />
       <ToastContainer 
         position='bottom-left' 
-        autoClose={3000}
-        hideProgressBar={true}
+        autoClose={5000}
+        hideProgressBar={false}
         closeButton={false}
         newestOnTop={true}
         limit={1}

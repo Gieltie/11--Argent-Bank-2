@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
 import { resetUser } from '../features/userProfile/userProfileSlice'
 import Logo from '../assets/img/argentBankLogo.png'
+import { toast } from 'react-toastify'
 
 export { Header }
 
@@ -14,6 +15,7 @@ function Header() {
 	const navigate = useNavigate()
 
 	const onLogout = () => {
+		toast.success(`Good bye ${userName}`)
 		dispatch(logout())
 		dispatch(reset())
 		dispatch(resetUser())

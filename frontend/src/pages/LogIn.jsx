@@ -32,7 +32,7 @@ function LogIn() {
     }
 
     if (isSuccess || user) {
-			toast.success(user.message, {
+			toast.success(message, {
 				toastId: customId
 			})
 			dispatch(getProfile())

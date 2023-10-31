@@ -60,18 +60,18 @@ export const userProfileSlice = createSlice({
         state.message = action.payload
       }) */
       .addCase(getProfile.pending, (state) => {
-        state.isLoading = true;
+        //state.isLoading = true;
       })
       .addCase(getProfile.fulfilled, (state, action) => {
-        state.isLoading = false;
+        //state.isLoading = false;
         state.isSuccess = true;
-        state.profile = action.payload.body;
+        //state.profile = action.payload.body;
         state.firstName = action.payload.body.firstName;
         state.lastName = action.payload.body.lastName;
         state.userName = action.payload.body.userName;
       })
       .addCase(getProfile.rejected, (state, action) => {
-        state.isLoading = false;
+        //state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       });
