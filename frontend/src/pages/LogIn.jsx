@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { FormContainer, Spinner } from '../components'
 import { login, reset } from '../features/auth/authSlice'
+import { getProfile } from '../features/userProfile/userProfileSlice'
 
 export { LogIn }
 
@@ -24,33 +25,38 @@ function LogIn() {
   )
 
   useEffect(() => {
+		const customId = "custom-id-yes";
+
     if (isError) {
       toast.error(message)
     }
 
     if (isSuccess || user) {
-			toast.success(user.message)
+			toast.success(user.message, {
+				toastId: customId
+			})
+			dispatch(getProfile())
       navigate('/user')
     }
-
+		
     dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
-
+	
   const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
+		setFormData((prevState) => ({
+			...prevState,
       [e.target.name]: e.target.value,
     }))
   }
-
+	
   const onSubmit = (e) => {
-    e.preventDefault()
-
+		e.preventDefault()
+		
     const userData = {
-      email,
+			email,
       password,
     }
-
+		
     dispatch(login(userData))
   }
 
