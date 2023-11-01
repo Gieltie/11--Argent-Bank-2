@@ -1,17 +1,12 @@
-import { useSelector } from 'react-redux'
 import { AccountHeader, Account } from '../components'
 
 export { User }
 
 function User() {
-	const { firstName, lastName } = useSelector((state) => state.user)
 	
 	return (
 		<main className="main bg-dark">
-			<AccountHeader
-				firstName={firstName}
-				lastName={lastName}
-			/>
+			<AccountHeader />
 			<h2 className="sr-only">Accounts</h2>
 			<Account 
 				accountType="Checking"

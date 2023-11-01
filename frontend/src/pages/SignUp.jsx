@@ -148,7 +148,7 @@ function Signup() {
 					/>
 					<label htmlFor="form-userName">User Name</label>
 				</div>
-				<button className='signup-button'>Signup</button>
+				<button className='signup-button button'>Signup</button>
 				<p>Already have an account? <br /><Link to='/login'>Sign In</Link></p>
 			</form>
 		</FormContainer>

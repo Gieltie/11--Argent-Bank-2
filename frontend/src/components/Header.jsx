@@ -42,7 +42,7 @@ function Header() {
 						: 
 						<Link to='/signup' className="main-nav__item">
 							<i className="fa fa-user-circle"></i>
-							Signup
+							Register
 						</Link>
 					}
 				</li>
@@ -50,7 +50,7 @@ function Header() {
 					{ user ?
 						<Link to='/' className="main-nav__item" onClick={onLogout}>
 							<i className="fa fa-sign-out"></i>
-							Sign out
+							Sign Out
 						</Link>
 						:
 						<Link to='/login' className="main-nav__item">

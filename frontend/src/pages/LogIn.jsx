@@ -20,15 +20,15 @@ function LogIn() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  )
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
 
   useEffect(() => {
 		const customId = "custom-id-yes";
 
     if (isError) {
-      toast.error(message)
+      toast.error(message, {
+				toastId: customId
+			})
     }
 
     if (isSuccess || user) {
@@ -76,7 +76,6 @@ function LogIn() {
 						name="email"
 						value={email}
 						onChange={onChange}
-						//autoComplete='true'
 						required
 					/>
 					<label htmlFor="form-email">Username</label>
@@ -102,8 +101,8 @@ function LogIn() {
 					/>
 					<label htmlFor="form-checkbox">Remember me</label>
 				</div>
-				<button className="sign-in-button">Sign In</button>
-				<p>New customer? <Link to='/signup'>Signup</Link></p>
+				<button className="sign-in-button button">Sign In</button>
+				<p>New customer? <Link to='/signup'>Register</Link></p>
 			</form>
 		</FormContainer>
 	)

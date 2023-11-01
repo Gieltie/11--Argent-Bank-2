@@ -13,7 +13,7 @@ const initialState = {
 
 // Get user profile
 export const getProfile = createAsyncThunk(
-  "profile/getProfile",
+  "user/getProfile",
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.body.token;
@@ -30,50 +30,54 @@ export const getProfile = createAsyncThunk(
   }
 );
 
+// Update user profile
+export const updateProfile = createAsyncThunk(
+  "user/updateProfile",
+  async (data, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.body.token;
+      return await userProfileService.updateProfile(data, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const userProfileSlice = createSlice({
-  name: "profile",
+  name: "user",
   initialState,
   reducers: {
-    resetUser: (state) => initialState /* {
-      state.firstName = "";
-      state.lastName = "";
-      state.userName = "";
-      state.isError = false;
-      state.isSuccess = false;
-      state.isLoading = false;
-      state.message = "";
-    } */,
+    resetUser: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
-      /* .addCase(updateProfile.pending, (state) => {
-        state.isLoading = true
-      })
-      .addCase(updateProfile.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.profile.push(action.payload)
-      })
-      .addCase(updateProfile.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
-      }) */
-      .addCase(getProfile.pending, (state) => {
-        //state.isLoading = true;
-      })
       .addCase(getProfile.fulfilled, (state, action) => {
-        //state.isLoading = false;
         state.isSuccess = true;
-        //state.profile = action.payload.body;
         state.firstName = action.payload.body.firstName;
         state.lastName = action.payload.body.lastName;
         state.userName = action.payload.body.userName;
       })
       .addCase(getProfile.rejected, (state, action) => {
-        //state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(updateProfile.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.userName = action.payload.body.userName;
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
       });
   },
 });

@@ -9,7 +9,7 @@ function Account({ accountType, accountNumber, amount, description }) {
 				<p className="account__wrapper--amount-description">{description} Balance</p>
 			</div>
 			<div className="account__wrapper cta">
-				<button className="transaction-button">View transactions</button>
+				<button className="transaction-button button">View transactions</button>
 			</div>
 		</section>
 	)
