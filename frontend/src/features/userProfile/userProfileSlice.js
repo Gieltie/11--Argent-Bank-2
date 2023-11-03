@@ -53,7 +53,12 @@ export const userProfileSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    resetUser: (state) => initialState,
+    resetUser: (state) => {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.message = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -74,6 +79,7 @@ export const userProfileSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.userName = action.payload.body.userName;
+        state.message = action.payload.message;
       })
       .addCase(updateProfile.rejected, (state, action) => {
         state.isLoading = false;

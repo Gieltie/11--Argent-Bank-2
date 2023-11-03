@@ -26,9 +26,7 @@ function LogIn() {
 		const customId = "custom-id-yes";
 
     if (isError) {
-      toast.error(message, {
-				toastId: customId
-			})
+      toast.error(message)
     }
 
     if (isSuccess || user) {

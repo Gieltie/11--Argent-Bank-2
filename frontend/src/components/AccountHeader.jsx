@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { FormContainer } from "../components";
-import { updateProfile } from "../features/userProfile/userProfileSlice";
+import { resetUser, updateProfile } from "../features/userProfile/userProfileSlice";
+import { toast } from "react-toastify";
 
 export { AccountHeader }
 
@@ -11,8 +12,24 @@ function AccountHeader() {
 
   const dispatch = useDispatch()
 
-  const { firstName, lastName } = useSelector((state) => state.user)
+  const { firstName, lastName, isError, isSuccess ,message } = useSelector((state) => state.user)
   
+  useEffect(() => {
+		const customId = "custom-id-yes";
+
+    if (isError) {
+      toast.error(message)
+    }
+
+    if (isSuccess) {
+			toast.success(message, {
+				toastId: customId
+			})
+    }
+		
+    dispatch(resetUser())
+  }, [isError, isSuccess, message])
+
   const ToggleEdit = () => {
     setOpen(!open);
   };

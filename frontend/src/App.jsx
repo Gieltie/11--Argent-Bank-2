@@ -12,10 +12,11 @@ function App() {
       <Header />
       <Outlet />
       <Footer />
-      <ToastContainer 
+      <ToastContainer
+        toastStyle={{border: "3px solid #00bc77", backgroundColor: "#292A2D", color: "white"}}
         position='bottom-left' 
         autoClose={5000}
-        hideProgressBar={false}
+        hideProgressBar={true}
         closeButton={false}
         newestOnTop={true}
         limit={1}
