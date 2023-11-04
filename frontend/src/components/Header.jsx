@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
 import { resetUser } from '../features/userProfile/userProfileSlice'
-import Logo from '../assets/img/argentBankLogo.png'
+import Logo from '../assets/img/argentBankLogo.webp'
 import { toast } from 'react-toastify'
 
 export { Header }

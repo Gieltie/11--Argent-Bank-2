@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userProfileService from "./userProfileService";
 
-const userData = JSON.parse(localStorage.getItem("userProfile"));
-const firstName = userData.body.firstName;
-const lastName = userData.body.lastName;
-const userName = userData.body.userName;
+const userData = JSON.parse(localStorage.getItem("userProfile"))
+  ? JSON.parse(localStorage.getItem("userProfile"))
+  : "";
+const firstName = userData.firstName;
+const lastName = userData.lastName;
+const userName = userData.userName;
 
 const initialState = {
   firstName: firstName ? firstName : "",
