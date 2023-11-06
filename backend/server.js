@@ -10,7 +10,7 @@ const dbConnection = require("./database/connection");
 dotEnv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.API_PORT || 3001;
 
 // Connect to the database
 dbConnection();
@@ -38,8 +38,8 @@ app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
 });
 
-if (precess.env.PORT) {
-  app.listen(process.env.PORT);
+if (precess.env.API_PORT) {
+  app.listen(process.env.API_PORT);
 }
 
 module.exports = app;
