@@ -21,8 +21,7 @@
   "scripts": {
     "dev:server": "nodemon ./backend/server.js",
     "populate-db": "node ./backend/scripts/populateDatabase.js",
-    "server": "node ./backend/server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn --prefix frontend && yarn build --prefix frontend"
+    "server": "node ./backend/server.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
