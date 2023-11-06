@@ -37,3 +37,9 @@ app.get("/", (req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
 });
+
+if (precess.env.PORT) {
+  app.listen(process.env.PORT);
+}
+
+module.exports = app;
