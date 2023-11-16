@@ -33,7 +33,7 @@ function Header() {
 			<ul>
 				<li>
 					{ user ? 
-						<Link to='/user' className="main-nav__item">
+						<Link to='/profile' className="main-nav__item">
 								<i className="fa fa-user-circle"></i>
 								{userName}
 						</Link> 

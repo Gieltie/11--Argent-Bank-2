@@ -32,7 +32,7 @@ function LogIn() {
 				toastId: customId
 			})
 			dispatch(getProfile())
-      navigate('/user')
+      navigate('/profile')
     }
 		
     dispatch(reset())

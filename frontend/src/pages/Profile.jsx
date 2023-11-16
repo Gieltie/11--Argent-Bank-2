@@ -1,6 +1,6 @@
 import { AccountHeader, Account } from '../components'
 
-function User() {
+function Profile() {
 	
 	return (
 		<main className="main bg-dark">
@@ -28,4 +28,4 @@ function User() {
 	)
 }
 
-export { User }
+export { Profile }

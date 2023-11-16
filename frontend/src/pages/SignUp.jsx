@@ -35,7 +35,7 @@ function Signup() {
 			toast.success(message, {
 				toastId: customId
 			})
-      navigate('/user')
+      navigate('/profile')
     }
 
     dispatch(reset())

@@ -4,14 +4,14 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import { Provider } from 'react-redux'
 import { App } from './App.jsx'
 import { PrivateRoute } from './components'
-import { Home, LogIn, Signup, User, Error } from './pages'
+import { Home, LogIn, Signup, Profile, Error } from './pages'
 import { store } from './store.js'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route element={<PrivateRoute />}>
-        <Route path="/user" element={<User />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
       </Route>
       <Route index={true} path="/" element={<Home />}></Route>
       <Route path="/login" element={<LogIn />}></Route>
