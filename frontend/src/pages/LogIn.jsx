@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { FormContainer, Spinner } from '../components'
-import { login, reset } from '../features/auth/authSlice'
+import { /* reset, */ login } from '../features/auth/authSlice'
 import { getProfile } from '../features/userProfile/userProfileSlice'
 
 function LogIn() {
@@ -35,7 +35,7 @@ function LogIn() {
       navigate('/profile')
     }
 		
-    dispatch(reset())
+    //dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
 	
   const onChange = (e) => {

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { FormContainer, Spinner } from '../components'
-import { reset, register } from '../features/auth/authSlice'
+import { /* reset, */ register } from '../features/auth/authSlice'
 
 function Signup() {
 	const [formData, setFormData] = useState({
@@ -38,7 +38,7 @@ function Signup() {
       navigate('/profile')
     }
 
-    dispatch(reset())
+    //dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const onChange = (e) => {
