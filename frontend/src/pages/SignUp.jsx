@@ -5,8 +5,6 @@ import { toast } from 'react-toastify'
 import { FormContainer, Spinner } from '../components'
 import { reset, register } from '../features/auth/authSlice'
 
-export { Signup }
-
 function Signup() {
 	const [formData, setFormData] = useState({
 		email: '',
@@ -154,3 +152,5 @@ function Signup() {
 		</FormContainer>
 	)
 }
+
+export { Signup }

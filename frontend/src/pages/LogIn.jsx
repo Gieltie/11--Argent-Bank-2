@@ -6,8 +6,6 @@ import { FormContainer, Spinner } from '../components'
 import { login, reset } from '../features/auth/authSlice'
 import { getProfile } from '../features/userProfile/userProfileSlice'
 
-export { LogIn }
-
 function LogIn() {
 	const [formData, setFormData] = useState({
     email: '',
@@ -105,3 +103,5 @@ function LogIn() {
 		</FormContainer>
 	)
 }
+
+export { LogIn }

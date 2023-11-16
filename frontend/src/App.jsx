@@ -4,8 +4,6 @@ import { Header, Footer } from './components'
 import './App.scss'
 import "react-toastify/dist/ReactToastify.css"
 
-export { App }
-
 function App() {
   return (
     <>
@@ -27,3 +25,5 @@ function App() {
     </>
   )
 }
+
+export { App }

@@ -4,7 +4,7 @@ import { FormContainer } from "../components";
 import { resetUser, updateProfile } from "../features/userProfile/userProfileSlice";
 import { toast } from "react-toastify";
 
-export { AccountHeader }
+
 
 function AccountHeader() {
   const [open, setOpen] = useState('')
@@ -101,3 +101,5 @@ function AccountHeader() {
     </>
   );
 }
+
+export { AccountHeader }

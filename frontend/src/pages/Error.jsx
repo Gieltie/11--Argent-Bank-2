@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom"
 
-export { Error }
-
 function Error() {
 	return (
 		<main className="main bg-dark error">
@@ -13,3 +11,5 @@ function Error() {
 		</main>
 	)
 }
+
+export { Error }

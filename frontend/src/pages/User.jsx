@@ -1,7 +1,5 @@
 import { AccountHeader, Account } from '../components'
 
-export { User }
-
 function User() {
 	
 	return (
@@ -29,3 +27,5 @@ function User() {
 		</main>
 	)
 }
+
+export { User }

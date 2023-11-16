@@ -1,5 +1,3 @@
-export { FormContainer }
-
 const FormContainer = ({ children }) => {
 	return (
 		<main className="main bg-dark">
@@ -7,5 +5,7 @@ const FormContainer = ({ children }) => {
 				{children}
 			</section>
 		</main>
-)
+	)
 }
+
+export { FormContainer }

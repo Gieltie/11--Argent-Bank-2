@@ -1,5 +1,3 @@
-export { Footer }
-
 function Footer() {
 	return (
 		<footer className="footer">
@@ -7,3 +5,5 @@ function Footer() {
 		</footer>
 	)
 }
+
+export { Footer }

@@ -1,5 +1,3 @@
-export { Account }
-
 function Account({ accountType, accountNumber, amount, description }) {
 	return (
 		<section className="account">
@@ -14,3 +12,5 @@ function Account({ accountType, accountNumber, amount, description }) {
 		</section>
 	)
 }
+
+export { Account }

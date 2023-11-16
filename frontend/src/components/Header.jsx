@@ -5,8 +5,6 @@ import { resetUser } from '../features/userProfile/userProfileSlice'
 import Logo from '../assets/img/argentBankLogo.webp'
 import { toast } from 'react-toastify'
 
-export { Header }
-
 function Header() {
 	const { user } = useSelector((state) => state.auth)
 	const { userName } = useSelector((state) => state.user)
@@ -63,3 +61,5 @@ function Header() {
 		</nav>
 	)
 }
+
+export { Header }

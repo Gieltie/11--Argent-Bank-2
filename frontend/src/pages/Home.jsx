@@ -3,8 +3,6 @@ import chatIcon from '../assets/img/icon-chat.webp'
 import moneyIcon from '../assets/img/icon-money.webp'
 import securityIcon from '../assets/img/icon-security.webp'
 
-export { Home }
-
 function Home() {
 	return (
 		<main>
@@ -41,3 +39,5 @@ function Home() {
 		</main>
 	)
 }
+
+export { Home }

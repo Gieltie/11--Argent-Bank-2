@@ -1,5 +1,3 @@
-export { Spinner }
-
 function Spinner() {
   return (
     <div className='loadingSpinnerContainer'>
@@ -7,3 +5,5 @@ function Spinner() {
     </div>
   )
 }
+
+export { Spinner }

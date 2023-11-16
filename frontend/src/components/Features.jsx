@@ -1,5 +1,3 @@
-export { Features }
-
 function Features({ image, alt, title, text }) {
 	return (
 		<div className="featureItem">
@@ -9,3 +7,5 @@ function Features({ image, alt, title, text }) {
 		</div>
 	)
 }
+
+export { Features }
