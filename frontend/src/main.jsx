@@ -4,7 +4,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import { Provider } from 'react-redux'
 import { App } from './App.jsx'
 import { PrivateRoute } from './components'
-import { Home, LogIn, Signup, Profile, Error } from './pages'
+import { Home, LogIn, Profile, Error } from './pages'
 import { store } from './store.js'
 
 const router = createBrowserRouter(
@@ -15,7 +15,6 @@ const router = createBrowserRouter(
       </Route>
       <Route index={true} path="/" element={<Home />}></Route>
       <Route path="/login" element={<LogIn />}></Route>
-      <Route path="/signup" element={<Signup />}></Route>
       <Route path="/*" element={<Error />}></Route>
     </Route>
   )

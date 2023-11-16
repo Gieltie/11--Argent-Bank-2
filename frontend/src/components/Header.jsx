@@ -31,32 +31,25 @@ function Header() {
 				<h1 className="sr-only">Argent Bank</h1>
 			</Link>
 			<ul>
-				<li>
-					{ user ? 
+				{ user ? 
+					<li>
 						<Link to='/profile' className="main-nav__item">
-								<i className="fa fa-user-circle"></i>
-								{userName}
-						</Link> 
-						: 
-						<Link to='/signup' className="main-nav__item">
 							<i className="fa fa-user-circle"></i>
-							Register
-						</Link>
-					}
-				</li>
-				<li>
-					{ user ?
+							{userName}
+						</Link> 
 						<Link to='/' className="main-nav__item" onClick={onLogout}>
 							<i className="fa fa-sign-out"></i>
 							Sign Out
 						</Link>
-						:
+					</li>
+					:
+					<li>
 						<Link to='/login' className="main-nav__item">
 							<i className="fa fa-sign-in"></i>
 							Sign In
 						</Link>
-					}
-				</li>
+					</li>
+				}
 			</ul>
 		</nav>
 	)
