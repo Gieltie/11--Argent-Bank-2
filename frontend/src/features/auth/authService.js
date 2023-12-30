@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3001/api/v1/user/";
+const API_URL = "https://argentbank-7khp.onrender.com/api/v1/user/";
 
 // Register user
 const register = async (userData) => {

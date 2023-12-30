@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3001/api/v1/user/profile";
+const API_URL = "https://argentbank-7khp.onrender.com/api/v1/user/profile";
 
 // Get user profile
 const getProfile = async (token) => {
